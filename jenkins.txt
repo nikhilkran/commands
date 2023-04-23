@@ -1,0 +1,15 @@
+jenkins acting as a waiter(intermediator/interface) in full devops cycle - Hence,here comes jenkins pipeline concept..
+Ques:- why ci/cd- because it acts as an intermediator to connect everything in infinity sign of devops
+(vimpnote:- java should be there for to install jenkins)
+1. add plugins under Manage Plugins so that u can integrate with other tools present under New Item in jenkins 
+2***. configure the plugins path in jenkins itself under Global Tool Configuration
+3. Build periodically / Poll SCM (build only when u made any changes) called ***** concept
+
+4.upstream and Downstream(he only asks-configure-build after other projects are built)concept:-
+(logic is as soon as job1 build ends it  should start start job2 build)
+configure------>Post Build Actions---------->Build other Project
+
+5.views/create_separate_list/workspace/directory/folder/suite------>can be managed added from all(by +icon)
+
+6.concept of Master & Slave via tag concept (manage jenkins->manage nodes and clouds->name->configure->add_labels)
+now go to job->configure->restrict where the project canbe run->add that same tag here..

@@ -1,0 +1,67 @@
+Docker disadvantages - host OS for which container image have shared have to be same.
+architecture:-
+image/dependencies (note:- u cannot modify image ,modification u can only do in container)
+push image to hub:-
+docker login
+username
+password
+docker tag image_name docker_id/new_image_name
+docker push docker_id/new_image_name 
+pull image from hub:-
+1.docker engine/doeman/server- pulls image/dependencies from hub and create container
+pull image from hub-docker pull docker_id/new_image_name
+create container+start+goinside- docker run -it --name container_name docker_id/new_image_name /bin/bash
+creating image from instruction file:-
+2*.Dockerfile/text file(list of all set of instructions required by any package to run-->we can create image/dependencies of it)
+Instructions ex:-
+create file with Dockerfile name only
+FROM - bring from hub
+RUN  -  echo "content to be place in file" > /tmp/file_name
+VOLUME ["/volume_name"]  note:-(here / is representing that it have to be place inside root directory) OR  [docker run -it --name container_name -v /volume_name image_name /bin/bash]
+MAINTAINER
+COPY - it should be present locally i,e ec2instance -         file_name /tmp
+ADD  - want anything to take from internet+do unzip as well - file_name.tar.gz /tmp
+EXPOSE
+WORKDIR - /tmp 
+CMD
+ENTRYPOINT
+ENV
+commad to create image from instruction file- docker build -t image_name_want_to_give .
+command for create+start+goinside container - docker run -it --name container_name image_name /bin/bash
+3. we can also make image of already running/created container- docker commit container_name_iamge_to_be_created image_name
+----------------------------------------
+commands:-
+see images present directly on hub ui or by command- docker search image_name
+to pull image from hub(Automatically pulls from hub)-docker pull image_name
+-----------------------------------------
+to see images already present on your local machine - docker images
+to check docker service start or not- service docker status/docker info
+to start docker service -             service docker start
+to stop docker serviec -              service docker stop
+to pull+create+start*+goinside*the container(mistake:-everytime new container it will create but image will remain only one***)-docker run -it --name container_name image_name /bin/bash
+to go inside container - docker attach container_name
+---------------------------------------------
+to see all container -          docker ps -a
+to see only running container - docker ps
+to start container - docker start container_name
+to stop container (note:-automatically stops when u exit from container)- docker stop container_name
+to remove container - docker rm container_name
+--------------------------------------------
+volume concept
+volume is a directory which can be created inside container
+we can share volume with other container or with host(ec2-instance) and if any changes made will reflect at both places(but not the case if created container by image only i,e not share volume)
+if we remove container,volume will not getting removed
+volume share command (takes place during container creation)- docker run -it --name container2 --priviledged=true --volumes-from container1 image_name_for_which_container_have_to_be_created /bin/bash
+-------------------------------------------------------
+how to access it through internet i,e browser - by port expose concept
+for only create-                    docker run -td --name container_name -p 80:80 image_name              (note:- 80 is host_port : 80 for synchronize container_port to this port)
+to go inside container              docker exec -it container_name /bin/bash
+-----------------------------------------------------------
+for webpage access:-
+ubuntu commands through linux machine?? checkout-
+to update -                    apt-get(instead of yum) update
+to install Apache Web Server - apt-get install apache2(not httpd) -y
+cd /var/www/html
+echo "hi nikhil!" >index.html
+service apache2 start
+----------------------------------------------------------------------------------

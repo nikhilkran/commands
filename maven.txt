@@ -1,0 +1,37 @@
+adv:-
+maven -common central repository having all dependencies..
+run project through linux
+run project through jenkins which is present on github ui
+---------------------------------------------------------
+vimpnote:- (in jenkins Goals no need to write mvn similarly, in eclipse as well)
+build(compile+test) - clean package
+----------------------------------------------------------
+Configure maven in your local machine i,e in Environment Variables 
+Step1 - mvn install
+Step2 - add new to system variable path of maven where it is lying in localmachine
+step3 - path->edit->new       - add step1 path followed by \bin (i,e path of bin)
+check in cmd - mvn    (it will show build failure that means maven is successfullyy configured )
+------------------------------------------------------------
+commands-
+cd give machine location where maven project have to be created
+-----------------------------
+mvn archetype:generate             (for have maven archetype template not v1.4)
+ -ask gor groupid which is      package_name  (syntax:- domainname.projectname.package_name)
+ -ask for artifactid which is   project_name
+mvn eclipse:eclipse       (needed two file for to run project in Eclipse IDE i,e .classpth & .project)
+-----------------------------
+mvn compile               (converts .java files to .class files / download jars from maven central repository to .m2 folder in local machine)
+mvn eclipse:eclipse       (similar to Effective Pom i,e it will now attach all jars and can be seen under Referenced libraries folder)
+mvn exec:java/ mvn test   (make sure u have added exec plugin for java run / surefire plugin for test cases run in pom.xml)
+------------------------------
+                   	OR
+can have "file_name.bat" extension file
+give path of project i,e cd full_projectpath
+Extra step in  jenkins command:-file_name.bat
+mvn compile test - Single command( note:- mvn test -also can used for compile+test)
+-------------------------------
+Earlier knowledge we have like this:-
+compwhen dealing with profile- mvn test -p profile_id_name (profile_id_name should be created in pom.xml)
+withwhen dealing with respect to tag- mvn test -Dcucumber.options="--tags@Addplace"
+(vimp:-make sure u have added tag at Feature File and at TestRunner file in CucumberOptions)
+------------------------------

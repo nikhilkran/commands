@@ -1,0 +1,70 @@
+advantages:-
+reduces downtime
+active monitoring of entire infrastructure
+allow you to monitor and troubleshoot server performance  issues i,e
+sometimes automatically fix problem
+
+how it works/architecture:-
+1.daemon will be having all details in configuration file i,e what it have to monitor and from where(i,e which client/node ip)
+2.with the helper of NRPE(nagios remote plugin executor)
+(note:- one plugin called nrpe_agent_plugin(ex- check by ssh)we also have to add in all clients/nodes for to communicate with NRPE) 
+3.later it will display all reports(in its own DB) on web via ip of server
+4.default port is 5666,5667,5668
+
+Steps to start nagios on cloud server-
+step1- install prerequistes software like apache(httpd),php,gcc compiler and gd development libraries
+commands are-
+sudo su
+yum install httpd php
+yum install gcc glibc glibc-common
+yum install gd gd-devel
+step2 - create account information i,e user and password for nagios
+adduser -m nagios
+passwd nagios
+now it will ask to set the password
+step3 - create a group
+groupadd nagioscmd
+usermod -a -G nagioscmd nagios
+usermod -a -G nagioscmd apache
+step4 -download nagios core and plugin(wget url_path) inside a directory so create a directory first
+wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.0.8.tar.gz
+wget http://nagios-plugins.org/download/nagios-plugin-2.0.3.tar.gz
+mkdir ~/downloads        (note- ~ is used to create directory under home directory)
+go inside- cd ~/downloads 
+unzip - tar zxvf nagios-4.0.8.tar.gz
+go inside - cd nagios-4.0.8
+configure script with the name of group you created-./configure --with-command-group=nagioscmd
+Compile- make/make all
+INstall- make install
+Install initscript,sample config files-
+make install-init
+make install-config
+make install-commandmode
+*****Configure it to local machine for access - make install-webconf
+
+step5- create account information for to acess it through web interface
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+now it will ask for to set password
+service start/restart - service httpd restart 
+
+step6 - install plugin (as we did for nagios software)
+cd ~/downloads
+tar zxvf nagios-plugin-2.0.3.tar.gz
+go inside - cd nagios-plugin-2.0.3
+configure,compile and install the plugin
+./configure --with-nagios-user=nagios--with-nagios-groups=nagios
+make
+make install
+step7- start nagios setting
+for to start automatically whenever syatem boots - chkconfig --add nagios
+                                                   chkconfig nagios on
+step8 - verify nagios configuration
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+
+start nagios - service nagios start
+               service httpd restart
+step 10 - 
+copy public ip from nagios cloud server
+ip - 20.1.1.1/nagios/
+ask for username - nagiosadmin
+password         - what you have made

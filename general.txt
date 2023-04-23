@@ -1,0 +1,9 @@
+1.all tools we will install at one place only i,e cloudserver(remotely placed)
+2.we will access to it by its public ip address*** (note:- in organisation it will be private ip)
+  i,e we have to map server with our localmachine to access via specific port/default port Ex- 80,8080,etc 
+---------------------------------------------
+General done in jenkins:-users(your jenkins)are created with certain roles/permissions by admin(have all rights & permissions)so that they can perform their work by their id & password--plugin-(role based authorization strategy)
+  -->configure global security-->select role based strategy-->save
+  -->manage jenkins-->manage and assign roles-->manage roles-->assign roles(first set global roles then item roles)
+  steps to create users-
+  manage jenkins->manage users->create users->add users here..

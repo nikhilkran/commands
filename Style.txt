@@ -1,0 +1,47 @@
+Css
+(note:- for base i,e root path - use ./ or /)
+6 Types of Selectors (syntax {})- tag,Id(#),Class(.),Grouping(separated by ,)/Direct child(>)/Nested(separated by space),Universal(*),zuroclass(tag_name:hover)
+Inline>{Internal(written in script tag under head*****tag) == External(link in head tag)} high preference will be given to that which is used at lastly i,e recently..
+property-
+units-
+absolute units- px      (Remember:- 1 devicepixel may or may not equal to 1 css pixel)
+relative units- %(wrt parent),vh/vw(ex:- 100vh wrt viewport screen),rem(wrt fontsize of root element i,e html),em
+border-left : 10px solid red  vs border-width : 10px 5px 6px 7px (clockwise order) vs border: 10px solid red/hex/rgba/rsla (shorthand way for width style color)
+---------------------------------------------------------------------------------------------------------------------------------
+Display Property in Css*****
+1.inline(cannot set height & width property also vertical magrin & vertical padding) 
+Ex:- span (height & width taken according to content automatically)
+note- can be change to block explicitly i,e display : block;
+2.inline-block - whenever u are controlly height & width then say it is inline-block not inline *****
+  useful when to place content aside (ex:- diferent containers/block present in body tag <header>,<main>,<aside><section></section></aside>,<footer>)
+  *****vertical-align : top; (note:- because by default they have vertical-align : bottom)
+3.block(i,e enter) - Ex:- div,paragraph,heading tags i,e takes complete line space  (for to make it inline explicitly use display : inline;)
+----
+flex:- is used to position elements(i,e div) automatically wraps/shink in equally when size is less if need to customized use flex-shrink property.  (v.imp:- height and width wraps in single line or single column for to wrap in multiple line use flax-wrap property concept)
+display : flex; (default horizontally takes)
+flex-direction : row(top to bottom) (default takes this)/row-reversex,column((top to bottom)/column-reverse                                           note:-(can use order property for which default value is 0)
+*****flex-wrap:wrap(top to bottom-for row, for column-left to right)/wrap-reverse
+
+justify-content:flex-start/flex-end/center/space-around/space-between             (works with respect to main axis i,e flex-direction)
+align-items:flex-start/flex-end/center/stretch/baseline                           (works with respect to cross axis i,e perpendicular ro main axis)
+----------------------------------------------------------------------------------------------------------------------------------
+backgroung-image : url("pathofimage");*****
+background-repeat : no-repeat;
+background-position : center;
+background-size : contain;  vs background-size : 300px 200px;
+background-attachment:scroll/fixed; - in scroll image will also scroll
+text-decoration : none; - (for to remove underline)
+
+----------------------------------------
+box model are of two types:-
+1. content-box(bydefault) here width,height what we have given is content width & height
+2. box-sizing : border-box;
+
+padding i,e within element 
+margin i,e space outside element, can have negative value as well
+(Mistake:-vertical margin i,e margin-top,margin-bottom it is NOT additive in nature)*****
+but horizontal margin do get added
+margin-left :10px ,margin-right : 10px,(General:-margin: 10px 3px 4px 6px (clockwise way))
+----------------------------------------------------------------
+value auto*****
+margin:auto - set only horizontal margin i,e bring it to center

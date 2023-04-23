@@ -1,0 +1,82 @@
+----------------------------------Linus purchase on AWS Remote-------------------------------------
+----------------------------------no ui,faster/easy to use than window-------------------------------
+----------------------------------note - All commands are casesensitive
+for linux - ec2-user         
+sudo su (super user do-switch to root/admin user i,e represent by # sign)
+yum is the prefix
+------------------------------------------------------------------------------------------------------
+for ubuntu(distributor of linux) - ubuntu          
+every command start use sudo
+apt-get / apt(new_versions)
+------------------------------------------------------------------------------------------------------
+file creation
+1.cat - cat >file_name(empty file create)/cat >>file_name(addcontent to it) , cat file_name(to see content)
+------------------------------------------------------------------------
+2.touch - main work is to create timestamp i,e touch -a file_name ,touch -m file_name
+---we can create as well as edit the file----
+3.vi/vim - mainly used because we can edit the content of file  (note:- i,esc,:wq where w for save,q for quit)
+4.nano
+---------------------------------------------------------------------
+ctrl+d/+z/exit/q - to come out/quit
+Note- for hidden files use . infront of filename and to view use a flag i,e  ls -a
+dir(windows)/ls/ls -l/tree(repentation in DOM) - to list all files&folders
+cls or clear/ctrl+l - for to clear console
+copy- cp file_src file_dest
+cut/move - mv file_src/dir_src dir_dest
+remove - rm -rf file_name
+--------------------------------------------------
+folder creation
+mkdir folder_name1 folder_name2 note- for to make dir inside dir use p flag and use / to separate
+cd(change directory) foler_name/dir_name and for to go back cd .. (vimpmistake:- cannot do for file)
+less - for to see full content
+more - for to see page by page
+head - 
+tail - 
+-------------------------------------------------------------
+DOWNLOAD any url:-
+wget url_link (note:- useful when to have anything get downloaded from internet,make sure u have made All traffic-anywhere & SSH-anywhere)
+(note:- sometimes we will having link for download+install then no need to use wget)
+-------------------------------------------------------------
+commands to INSTALL anything:-
+hostname - gives ipaddress/url of your machine, for dns use i flag
+ifconfig or cat /etc/os-release- for configuartion files or version of machine
+yum update -y                     - simply update the list of packages what it is already having downloaded(by-default)                                                                                            
+yum install httpd -y              - to install (httpd is for Apache Servee which is already downloaded/present in ec2-user bydefault) 
+yum remove httpd -y
+service httpd status - to see the status of package/software installed
+service httpd start - to start the service
+service httpd stop - to stop running the service
+yum list installed - list all installed package
+chkconfig httpd on - automatically start service when u switch on your machine every time
+chfconfig httpd off
+-----------------------------------
+which package_name/software- check whether package/software is installed or not
+whoami-
+echo "message"- to dispaly something   Note: echo "message" >file_name , echo "message" >>file_name
+grep - useful when to search something
+sort file_name - sort lexographically(alphabetically)
+----------------------------------------------------------
+create user/group
+useradd user_name or adduser user_name        ---to view cat /etc/passwd
+groupadd group_name or addgroup group_name    ---to view cat /etc/group
+note- for to add users into group             ---gpasswd -M nikhil,vipul group_name
+
+shoftlink i,e creating shortcut
+ln -s file1 softlinkfile1
+hardlink or backupfile
+ln file2 hardlink2
+
+merge file/folders to 1 file-
+tar -cvf dirx.tar dirx
+for compress-
+gzip dirx.tar
+for unzip-
+gunzip dirx.tar.gz
+for unmerge-
+tar -xvf dirx.tar
+-----------------------------------------------
+concept of change of permissions to root/owner,group,other_user
+d/- rwx r-x r--  => means r= read (has weightage 4), w= write (has weightage 2),x= execute (has weightage1)
+chmod 777 file_name/dir_name
+chown owner_name file_name/dir_name
+chgrp group_name file_name/dir_name

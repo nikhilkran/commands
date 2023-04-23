@@ -1,0 +1,73 @@
+-git (local machine dealing)vs github (same thing remote cloud also can do)
+git is a software through which we communicate with server github where all our version 
+code are dumped into it..
+hence, git is a software which is installed in our local machine through which we
+can communicate with central repository(server) github in order to perform certain
+operations...
+
+how it is different from traditional softwares?
+by git we can perform certain intelligent features such as merging push request
+which is generally not in traditional softwares......(it will fully replace old content..)
+(Note:-90% case git will manage our work with github but 10% times conflict arrises 
+where u have to only resolve it....)
+
+
+
+---------------------------------------------------------------------------------------------------
+commands-
+first go to that project path which u want to push i,e by cd projectfoldername or cd ..(for to move 1 step back) i,e current directory listing...
+.....................................................................
+Once only after insatallation of git software...
+tell about yourself i,e required for who is pusing code i,e name and email
+for to check git version - git --version/git -v
+git config --global user.name  "----"
+git config --global user.email "----"
+for to check- git config --list
+........................................................................................................................................................
+
+Scenerio 2 -when u want to send code (your repo is bydefault created as  master if u not gonna create,so its better to create a branch with name main i,e       git branch -M main)............................................
+(First Step) bring hidden .git in your project - git init
+add untracked files which u want to push -
+note:-for to remove untracked file - git clean -f
+staging - git add ./*/respective_file_name (if all folders i,e whole project(for first time we need to do this)/files which made updation).....before add and after add check status by command-(git status)
+note:- for to reset from staging area (note:- before commit) - git reset . / git reset  --hard(removes from working directory itself)
+add messages/logs - git commit -m "----"
+note:- for to revert(after commit) - git revert commit_id   (it will again send file which is committed 1 step before )
+-------------------------------------------
+linux (no ui useful)
+to see commits- git log / git log --oneline /git log -1/-2/-3 / git log --grep "keyword_from_which_commit_to_be_search"
+to add tag to commit - git tag -a tag_name -m "message" commit_id(atleast 7char)
+to see content of that commit- git show commitid_generated(atleast 7char)
+--------------------------------------------
+// make sure u have manually created projectfolder/repo in your local system..
+(Not Always)setup origin where u want to push code - 
+1st time - git remote add  origin URL_to_send_code/address/path...(Note- here u have named origin as the remote repository name)
+note- for to check origin and destination -----------------git remote -v
+now push code-     git push origin master(of remote github cloud server)
+
+
+
+Scenerio 1 -whenever want to take code.....................................................................................................................
+1st time - git remote add origin url
+OR if doing cloning-  git clone(instead of remote add origin) url  (advanatage is that u no need to have local repository already existing in your local machine what we previously doing,it will create repository with remote cloud repository name itself)
+git pull origin master(of remote github cloud server)     
+-------------------------------------------------------------------------------------------
+when u are dealing with multiple branches in your local machine i,e created different rooms in your house***
+CHECK YOUR BRANCH- (git branch)
+for creating a new branch from master_branch(default comes everywhere***)- git branch subbranch_want_to_create   (note:- data(i,e file,commit,etc) will be copied automatically first time only when u create branch)
+(note:- unless and until (u have not added to stage & commited) the file created in any branch will show in all other branch as well.)***
+Delete a branch - git branch -d branch_name
+switch to other branch - git checkout branch_name
+now take pull in your created subbranch - using pull command
+
+now going to master branch - git checkout branch_name
+now merge(called pull request on github) into master branch -git merge branch_name_FROMWHERE_content_has_to_merge       -------means it is merging into the branch where the control is present
+
+...........................................................................................................................................................
+for to change origin address
+git remote set-url origin https://github.com/user/repo2.git
+............................................................................................................................................................
+*for to change configuration credentials so that when u commit to any repo then it will represent by your respective username--------->git config --list
+go to git settings and delete from there itself in your local machine
+
+

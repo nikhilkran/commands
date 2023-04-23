@@ -1,0 +1,127 @@
+Advantage of containerization/containerization Tool called Docker-
+1. hold environment so that we can easily create image and use it on other machine without having dependencies mismatched on that platform.
+2. utilizes resources of hardware dynamically.
+-----------------------------------------------------
+K8s - developed by google
+[webservices- we user communicate with receptionlist through which we communicate with servers/microservices api]
+it is used to manage all types of pod***** containg containers((microservices/api/chunks) and which is further managed by api server and controller via kubelet i,e not monolithic) i,e 
+(note:- kubernetes manage pod(having dynamic ip present inside particular node)not manages containers(also containers not have ip) - 1 pod contains 1 container..)
+
+(clustering of any number of container inside pod running on different networks- physical hardware,virtual,cloud)
+OR it automates container deployment,container healing & scaling i,e increse/decrease size either vertically or horizontally*****(by adding higher level kubernetes objects/plugins),load balancing(wrt user request).
+Architecture:-
+simiar to client server architecture on cloud server(i,e have maste_node(t2.medium - atleast 2 cpu and 4gb ram)- slave_nodes containg pods)
+(vimpnote only for practice:- install minikube if want to do all masternode and slavenodes in one machine only)
+we user create our manisfesto for to give to kube-api server.
+command start from         kubectl***** - when working on cloud server
+                           kubeadm - when working on hardware
+                           kubefed - when working as Hybrid
+--------------------------------------------------------------
+Aproach1 - via manifesto(declarative approach***** i,e we have file having instructions in the form of json/yaml i,e.yml and some commands to configure adv:-we can use it again in future - used when dealing with production environment)
+Template-
+a)single container inside single pod
+kind: Pod                              
+apiVersion: v1                     
+metadata:                           
+  name: testpod                  
+spec:                                    
+  containers:                      
+    - name: c00        (note:- -representing that it is new section/group)             
+      image: ubuntu              
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
+  restartPolicy: Never         # Defaults to Always(this is comment)
+
+b)multiple containers inside single pod
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod3
+spec:
+  containers:
+    - name: c00
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Technical-Guftgu; sleep 5 ; done"]
+    - name: c01
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
+  (vimpnote:- can give nodeSelector label under spec node_name: node_value)
+command -kubectl apply -f podfile_name.yml (note:- it will create+apply)
+         kubectl get pods /kubectl get pods -o wide / kubectl get pods -l label_name=label_value /kubectl get pods -l 'label_name in (label_value,label_value)'       (when searching with label)
+         kubectl describe pod pod_name      (gives details of pod)
+         kubectl logs -f pod_name/ kubectl logs -f pod/name -c container_name          (note:- first one work only when we have 1 container inside pod gives details of container )
+         kubectl exec pod_name -c container_name -- hostname -i                         (note:- gives ip of pod)
+         kubectl exec pod_name -it -c container_name -- bin/bash                        (for to go inside container)
+         ps/ps -ef     (no need to use docker at start now)         
+         kubectl delete -f podfile_name.yml /kubectl delete pod pod_name / kubectl delete pod -l label_name1=label_value1,label_name2=label_value2
+---------------------------------------------------------------------------
+how to give annotations under metadata and provide description:in manifesto file
+how to give env under spec in manisfesto file
+*****how to give labels under metadata and provide label_name:label_value in manisfesto file      (detail about labels - kubectl get pods --show-labels)
+(note:-imperative approach direct command - kubectl label pods pod_name label_name = label_value)
+    (similarly for to apply label at node - kubectl label nodes node_ip node_name = node_value)
+----------------------------------------------------------------------------
+How to expose port for pod
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod4
+spec:
+  containers:
+    - name: c00
+      image: httpd                         (note:- httpd is for Apache Server)
+      ports:
+       - containerPort: 80  
+command- kubectl apply -f podfile_name.yml
+         kubectl get pods -o wide
+         curl ip_of_pod:80
+---------------------------------------------------------------------------------------------------------------------
+Aproach2 - via commands(imperative approach - useful for live development work running i,e cannot reuse it again)
+commands are:- (if needed to add two commands use &&)
+sudo su
+apt-get update / apt update
+apt-get install apt-transport-https / apt install apt-transport-https
+
+
+apt install docker.io -y / apt update && apt -y install docker.io
+docker --version
+systemctl start docker
+systemctl enable docker
+
+sudo curl -s https://packages.cloud.google.com/apt... | sudo apt-key add 
+
+
+nano /etc/apt/sources.list.d/kubernetes.list
+
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+
+
+apt-get update
+
+apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+
+
+BOOTSTRAPPING THE MASTER NODE (IN MASTER)
+
+kubeadm init
+ 
+
+COPY THE COMMAND TO RUN IN NODES & SAVE IN NOTEPAD
+
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl apply -f https://raw.githubusercontent.com/cor...
+
+kubectl apply -f https://raw.githubusercontent.com/cor...
+
+CONFIGURE WORKER NODES (IN NODES)
+
+COPY LONG CODE PROVIDED MY MASTER IN NODE NOW LIKE CODE GIVEN BELOW
+
+e.g- kubeadm join 172.31.6.165:6443 --token kl9fhu.co2n90v3rxtqllrs --discovery-token-ca-cert-hash sha256:b0f8003d23dbf445e0132a53d7aa1922bdef8d553d9eca06e65c928322b3e7c0
+
+GO TO MASTER AND RUN THIS COMMAND
+kubectl get nodes 
